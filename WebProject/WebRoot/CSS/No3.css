@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+/* 整体设置 */
+*{margin:0px;padding:0px;}
+ 
+/**
+ * 设置日历的大小
+ */
+.calendar{
+  width: 650px;
+  height: 20px;
+  display: block;
+  background-color:grey;
+  position:absolute;
+}
+ 

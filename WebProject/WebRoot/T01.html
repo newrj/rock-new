@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>T01.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" type="text/css" href="CSS/NewFile.css">
+    
+    <script type="text/javascript" >
+    var count=0;
+    var photo=new Array("a1.gif","a2.gif","a3.gif");
+    function getTime()
+    {
+         document.getElementById("img").src="image/"+photo[count];
+         count++;
+         count=count%photo.length;
+    }
+    function body_onload()
+    {
+        replace();
+        window.setInterval("getTime()",1500);
+        window.setInterval(replace,1000);
+    }
+    function toTwo(n)
+    {
+         if(n<10){
+             return '0'+n;
+         }else{
+            return  ''+n;
+         }
+    }
+    function replace(){
+         var oDate=new Date();
+         var str=toTwo(oDate.getHours())+toTwo(oDate.getMinutes())+toTwo(oDate.getSeconds());
+         
+         var oImg=document.getElementsByName("image");
+         for(var i=0;i<oImg.length;i++){
+             oImg[i].src="image/"+str.charAt(i)+".gif";
+         }
+           
+     }
+    
+   function div_onclick( div )
+	{
+		//通过 本元素找到 隔壁元素		
+		var li = div.parentNode;
+		var ul = li.getElementsByTagName("ul")[0];
+		
+		if(ul.style.display == "block" )
+		{
+		    document.getElementById("img").src="image/NodeImg2.gif";
+			ul.style.display = "none";
+		}else
+		{
+		    document.getElementById("img").src="image/NodeImg0.gif";
+			ul.style.display = "block";
+		}
+		
+	}
+    /*
+                 日历
+    */
+    function is_leap(year) { 
+   return (year%100==0?res=(year%400==0?1:0):res=(year%4==0?1:0));
+} //是否为闰年
+
+var nstr=new Date(); //当前Date资讯
+var ynow=nstr.getFullYear(); //年份
+var mnow=nstr.getMonth(); //月份
+var dnow=nstr.getDate(); //今日日期
+var n1str=new Date(ynow,mnow,1); //当月第一天Date资讯
+
+var firstday=n1str.getDay(); //当月第一天星期几
+
+var m_days=new Array(31,28+is_leap(ynow),31,30,31,30,31,31,30,31,30,31); //各月份的总天数
+
+var tr_str=Math.ceil((m_days[mnow] + firstday)/7); //表格所需要行数
+
+//打印表格第一行（有星期标志）
+document.write("<div class='calander' style='height:200px;position:absolute; margin-top:180px;margin-left:20px;valign=top'>");
+document.write ("<table  style='height:200px;width:300px;' border='1' align='center' width='220' cellspacing='0'><tr><td align='center'>日</td><td align='center'>一</td><td align='center'>二</td><td align='center'>三</td><td align='center'>四</td> <td align='center'>五</td><td align='center'>六</td> </tr>");
+
+for(i=0;i<tr_str;i++) { //表格的行
+   document.write("<tr>");
+   for(k=0;k<7;k++) { //表格每行的单元格
+      idx=i*7+k; //单元格自然序列号
+      date_str=idx-firstday+1; //计算日期
+      (date_str<=0 || date_str>m_days[mnow]) ? date_str="&nbsp;" : date_str=idx-firstday+1; //过滤无效日期（小于等于零的、大于月总天数的）
+      //打印日期
+      date_str==dnow ? document.write ("<td  align='center' bgcolor='#A7B7D9'>" + date_str + "</td>") : document.write ("<div class='calendar' id='calendar'><td align='center'>" + date_str + "</td></div>");
+   }
+   document.write("</tr>"); //表格的行结束
+}
+
+document.write("</table>");
+document.write("</div>");
+    
+    </script>
+  </head>
+  
+  <body onload="body_onload()">
+    <div class = "all">
+      <div class ="head">
+      <div class="fonts">电子商务</div>
+       <div class="advertisement">
+       
+       <img alt="1" id="img" src="image/a1.gif"
+			style="width:100%;height:100px;" />
+       </div>
+       <div class="time" id="time"> 
+        <img src="image/0.gif" width="20px" height="50" name="image" />
+        <img src="image/0.gif" width="20px" height="50" name="image" />
+        <img src="image/0.gif" width="20px" height="50" name="image" />
+        <img src="image/0.gif" width="20px" height="50" name="image" />
+        <img src="image/0.gif" width="20px" height="50" name="image" />
+        <img src="image/0.gif" width="20px" height="50" name="image" />
+       </div>
+      <a href="T01.html" onclick="counter_onclick()"
+            style=width:8%;height:30px;margin-left:85%;margin-top:80px;position:absolute;
+           color:white;">用户注册</a>
+       
+      </div>
+      <div class="middle">
+         <div class="middleleft">
+             <div class="middlelefttop">
+           
+             </div>
+             <div class="middleleftbottom">
+              <ul>
+  			    <li>
+  				  <div onclick="div_onclick(this)" ><img src="image/NodeImg1.gif" />数码产品</div>
+  				  <ul>
+  					<li><img src="image/NodeImg1.gif" />流行手机</li>
+  					<li><img src="image/NodeImg1.gif" />数码相机</li>
+  					<li><img src="image/NodeImg1.gif" />U盘存储</li>
+  					<li><img src="image/NodeImg1.gif" />录音笔</li>
+  					<li><img src="image/NodeImg1.gif" />DV摄像机</li>
+  			      </ul>
+  			    </li>
+  			
+  		      </ul>
+             </div>
+         </div>
+         <div class="middleright">
+            <div class="middlerighttop">
+            <a href="T01.html" onclick="shop_onclick()"
+            style="margin-left:75%;position:absolute;">√购物车</a>
+            <a href="T02.html" onclick="counter_onclick()" target="_blank" 
+            style="margin-left:85%;position:absolute;">※计算器</a>
+            </div>
+            <div class="middlerightmiddle">
+            
+               <div class="middlerightmiddle1">
+               <img alt="1" id="img1" src="image/z1.jpg"
+			style="width:80%;height:180px;" /><br>猕猴桃30枚&nbsp19.9元
+			<input type="button" value="加入购物车" onclick="button_onclick()"
+			       style="margin-left:5%;">
+
+                </div>
+               <div class="middlerightmiddle2">
+               <img alt="1" id="img1" src="image/z2.jpg"
+			style="width:80%;height:180px;" /><br>新疆红枣&nbsp15元
+			<input type="button" value="加入购物车" onclick="button_onclick()"
+			       style="margin-left:16%;">
+
+               </div>
+               <div class="middlerightmiddle3">
+               <img alt="1" id="img1" src="image/z3.jpg"
+			style="width:80%;height:180px;" /><br>ICA燕麦片&nbsp35元
+			<input type="button" value="加入购物车" onclick="button_onclick()"
+			       style="margin-left:16%;">
+
+               </div>
+            </div>
+            <div class="middlerightbottom">
+               <div class="middlerightbottom1">
+               <img alt="1" id="img1" src="image/z4.jpg"
+			style="width:80%;height:180px;" /><br>肥咻腰果&nbsp45元
+			<input type="button" value="加入购物车" onclick="button_onclick()"
+			       style="margin-left:16%;">
+
+               </div>
+               <div class="middlerightbottom2">
+               <img alt="1" id="img1" src="image/z5.jpg"
+			style="width:80%;height:180px;" /><br>果汁软糖&nbsp15元
+			<input type="button" value="加入购物车" onclick="button_onclick()"
+			       style="margin-left:16%;">
+               </div>
+               <div class="middlerightbottom3">
+               <img alt="1" id="img1" src="image/z6.jpg"
+			style="width:80%;height:180px;" /><br>台湾米饼&nbsp11.9元
+			<input type="button" value="加入购物车" onclick="button_onclick()"
+			       style="margin-left:16%;">
+               </div>
+            </div>
+         
+         </div>
+      
+      </div>
+    
+    </div>
+  </body>
+</html>
